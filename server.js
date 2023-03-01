@@ -45,6 +45,16 @@ app.post("/api/admin/add/post", (req, res) => {
 	}
 });
 
+// delete blog post
+app.delete("/api/admin/post/delete", (req, res) => {
+	db.collection("blog-post")
+		.deleteOne({ postName: req.body.postName })
+		.then(result => {
+			console.log(`Deleted blog post ${req.body.postName}`);
+		})
+		.catch(error => console.error(error));
+	res.json(`Deleted blog post ${req.body.postName}`);
+});
 // get all posts
 app.get("/api/posts", (req, res) => {
 	db.collection("blog-post")
